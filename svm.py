@@ -67,14 +67,14 @@ for i in loc:
     print np.dot(w, x[:, i]) - b
 
 x, y = load_data()
-# x = x.T
-# cls = np.array([np.dot(w, x[:, i]) for i in xrange(len(y))]) - b
-# srt = np.argsort(cls)
+cls = np.array([np.dot(w, x.T[:, i]) for i in xrange(len(y))]) - b
+srt = np.argsort(cls)
 
-# for i in srt:
-#     print cls[i], y[i]
+for i in srt:
+    print (cls[i], y[i]),
+print
 
-pcax = PCA(x)
+pcax = PCA(x, standardize=True)
 
 newdata = []
 
@@ -97,8 +97,6 @@ for i, xi in enumerate(np.array(supx)):
     print newsupx, np.dot(w, xi) - b
     plt.plot(newsupx[0], newsupx[1], 's',
              color=colordict[str(supy[i])])
-    # plt.plot([newsupx[0], newsupx[0]+neww[0]],
-    # [newsupx[1], newsupx[1]+neww[1]])
 
 
 def f(x0):
